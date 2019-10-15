@@ -8,11 +8,14 @@ import javax.validation.constraints.NotBlank;
  *
  * Represents a user of the system e.g. admin etc
  */
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotBlank
     @Column(name = "first_name", nullable = false)
     private String firstName;
