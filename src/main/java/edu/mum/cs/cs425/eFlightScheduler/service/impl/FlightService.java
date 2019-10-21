@@ -1,6 +1,7 @@
 package edu.mum.cs.cs425.eFlightScheduler.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -26,4 +27,8 @@ public class FlightService implements IFlightService{
 		return flightRepository.save(flight);
 	}
 
+	@Override
+	public Optional<Flight> findById(Long id) {
+		return flightRepository.findById(id);
+	}
 }
