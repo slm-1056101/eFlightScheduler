@@ -17,12 +17,16 @@ public class Runway {
     @NotBlank
     @Column(nullable = false)
     private String code;
+    
+    public Runway() {
+
+	}
 
     public Runway(String code) {
         this.code = code;
     }
 
-    public String getCode() {
+	public String getCode() {
         return code;
     }
 

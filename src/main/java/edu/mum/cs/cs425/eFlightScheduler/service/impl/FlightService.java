@@ -26,4 +26,10 @@ public class FlightService implements IFlightService{
 		return flightRepository.save(flight);
 	}
 
+	@Override
+	public void deleteFlight(Integer flightId) {
+		flightRepository.deleteById(flightId);
+		
+	}
+
 }

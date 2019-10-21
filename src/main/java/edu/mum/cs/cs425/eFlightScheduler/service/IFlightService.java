@@ -8,5 +8,6 @@ public interface IFlightService {
 	
 	List<Flight> getAllFlights();
 	Flight addNewFlight(Flight flight);
+	void deleteFlight(Integer flightId);
 
 }
