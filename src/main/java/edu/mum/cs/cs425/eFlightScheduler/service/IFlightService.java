@@ -13,4 +13,6 @@ public interface IFlightService {
 
     Optional<Flight> findById(Long id);
 
+    void deleteFlight(Long flightId);
+
 }

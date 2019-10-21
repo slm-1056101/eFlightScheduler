@@ -13,43 +13,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
+import edu.mum.cs.cs425.eFlightScheduler.models.Runway;
 import edu.mum.cs.cs425.eFlightScheduler.service.impl.FlightService;
+import edu.mum.cs.cs425.eFlightScheduler.service.impl.RunwayService;
 
 @Controller
-@RequestMapping(value = "/eflight/flights")
-public class FlightController {
+@RequestMapping(value = "/eflight/runways")
+public class RunwayController {
 	
 	@Autowired
-	private FlightService flightService;
+	private RunwayService runwayService;
 	
 	@Autowired
-	private FlightController(FlightService flightService) {
-		this.flightService = flightService;
+	private RunwayController(RunwayService runwayService) {
+		this.runwayService = runwayService;
 	}
 	
 	@GetMapping(value = {"/list"})
-    public ModelAndView listFlights() {
+    public ModelAndView listRunways() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("flights", flightService.getAllFlights());
-        modelAndView.setViewName("public/flights/list");
+        modelAndView.addObject("runways", runwayService.getAllRunways());
+        modelAndView.setViewName("public/runways/list");
         return modelAndView;
     }
 	
 	@GetMapping(value = {"/new"})
-    public String displayNewFlightForm(Model model) {
-        model.addAttribute("flight", new Flight());
-        return "public/flights/new";
+    public String displayNewRunwayForm(Model model) {
+        model.addAttribute("runway", new Runway());
+        return "public/runways/new";
     }
 	
     @PostMapping(value = {"/new"})
-    public String addNewFlight(@Valid @ModelAttribute("flight") Flight flight,
+    public String addNewRunway(@Valid @ModelAttribute("runway") Runway runway,
                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "publilc/flights/new";
+            return "publilc/runways/new";
         }
-        flight = flightService.addNewFlight(flight);
-        return "redirect:/eflight/flights/list";
+        runway = runwayService.addNewRunway(runway);
+        return "redirect:/eflight/runways/list";
     }
-
 }
