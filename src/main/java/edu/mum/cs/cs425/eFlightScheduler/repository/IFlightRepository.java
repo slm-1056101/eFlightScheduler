@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
 
 @Repository
-public interface IFlightRepository extends JpaRepository<Flight, Integer>{
+public interface IFlightRepository extends JpaRepository<Flight, Long> {
 
 }

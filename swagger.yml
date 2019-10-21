@@ -1,0 +1,131 @@
+swagger: "2.0"
+info:
+  description: "EFlightSchedule Server API.  Paste this yaml file at [http://editor.swagger.io](http://swagger.io) to view it formatted.      All endpoints are open (no security or rate limiting)."
+  version: "1.0.0"
+  title: "EFlight Schedule"
+  contact:
+    email: "senseidev@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8080"
+basePath: "/eflight/api/schedule"
+schemes:
+  - "http"
+paths:
+  /:
+    post:
+      tags:
+        - "schedule"
+      summary: "Request a flight schedule"
+      description: ""
+      operationId: "requestSchedule"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Schedule object that's needed"
+          required: true
+          schema:
+            $ref: "#/definitions/ScheduleRequest"
+      responses:
+        201:
+          description: "Created schedule"
+        422:
+          description: "Unprocessable Entity"
+    get:
+      tags:
+        - "schedule"
+      summary: "Fetches all schedules"
+      description: ""
+      operationId: "findAllSchedules"
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ScheduleResponse"
+  /{cursor}:
+    get:
+      tags:
+        - "schedule"
+      summary: "Fetches the next schedules"
+      description: "Fetches next schedules given last cursor (schedule id)"
+      operationId: "findScheduleAfterID"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "cursor"
+          in: "path"
+          description: "Last Schedule Id fetched"
+          required: true
+          type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ScheduleResponse"
+definitions:
+  ScheduleRequest:
+    type: "object"
+    properties:
+      flightId:
+        type: "integer"
+        format: "int64"
+      status:
+        type: "string"
+        description: "Status of Flight"
+        enum:
+          - "takeoff"
+          - "landing"
+      time:
+        type: "string"
+        format: "date-time"
+
+  ScheduleResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      flight:
+        $ref: "#/definitions/Flight"
+      runway:
+        $ref: "#/definitions/Runway"
+      status:
+        type: "string"
+        description: "Status of Flight"
+        enum:
+          - "takeoff"
+          - "landing"
+      time:
+        type: "string"
+        format: "date-time"
+
+  Flight:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      airline:
+        type: "string"
+      description:
+        type: "string"
+
+  Runway:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      code:
+        type: "string"
