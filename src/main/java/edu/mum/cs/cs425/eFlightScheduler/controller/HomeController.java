@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping(value = {"/", "/eflight", "/eflight/home"})
     public String home() {
-        return "home/index";
+        return "public/index";
     }
 
 }
