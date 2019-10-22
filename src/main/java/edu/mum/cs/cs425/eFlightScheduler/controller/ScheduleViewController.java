@@ -21,7 +21,7 @@ public class ScheduleViewController {
     @Autowired
     private IScheduleService service;
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public ModelAndView showSechduled() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("sechduled", service.getAll());
