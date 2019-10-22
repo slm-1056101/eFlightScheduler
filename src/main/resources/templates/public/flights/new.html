@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layouts/master-layout}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <title>eFlight Scheduling - Add New Flight</title>
 </head>
-<body>
+<body> <!--onload="document.querySelector('#customerNumber').focus();"-->
+    <th:block layout:fragment="content">
+
+        <form id="newFlightForm" method="post" action="/eflight/flights/new" th:object="${flight}">
+
+            <fieldset>            
+                <div class="container" style="margin-top: 1em;">
+                
+                    <div>
+            			<span style="font-size: 2em; color: #32a5e7;">Add New Flight Form</span>
+        			</div>
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" style="margin-top: 1em;">
+                                <label for="airline">Airline:</label>
+                                <span th:if="${#fields.hasErrors('airline')}" th:errors="*{airline}"
+                                      class="alert alert-danger"></span>
+                                <input tabindex="1" id="airline" name="airline" type="text" class="form-control" value=""
+                                       th:value="${flight.airline}" required autofocus/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" style="margin-top: 1em;">
+                                <label for="description">Description:</label>
+                                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                      class="alert alert-danger"></span>
+                                <input tabindex="1" id="description" name="description" type="text" class="form-control" value=""
+                                       th:value="${flight.description}" required autofocus/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>&nbsp;</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="text-align: right;">
+                                <a tabindex="9" href="/eflight/flights/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                                <button tabindex="10" id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Flight</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
 
 </body>
 </html>

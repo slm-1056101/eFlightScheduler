@@ -48,7 +48,7 @@ public class RunwayController {
                                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "publilc/runways/new";
+            return "public/runways/new";
         }
         runway = runwayService.addNewRunway(runway);
         return "redirect:/eflight/runways/list";

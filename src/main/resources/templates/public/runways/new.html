@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layouts/master-layout}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <title>eFlight Scheduling - Add New Runway</title>
 </head>
-<body>
+<body> <!--onload="document.querySelector('#customerNumber').focus();"-->
+    <th:block layout:fragment="content">
+
+        <form id="newRunwayForm" method="post" action="/eflight/runways/new" th:object="${runway}">
+
+            <fieldset>            
+                <div class="container" style="margin-top: 1em;">
+                
+                    <div>
+            			<span style="font-size: 2em; color: #32a5e7;">Add New Runway Form</span>
+        			</div>
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" style="margin-top: 1em;">
+                                <label for="code">Runway Code:</label>
+                                <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}"
+                                      class="alert alert-danger"></span>
+                                <input tabindex="1" id="code" name="code" type="text" class="form-control" value=""
+                                       th:value="${runway.code}" required autofocus/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>&nbsp;</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="text-align: right;">
+                                <a tabindex="9" href="/eflight/runways/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                                <button tabindex="10" id="btnSubmit" type="submit" class="btn btn-outline-primary">Add Runway</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
 
 </body>
 </html>

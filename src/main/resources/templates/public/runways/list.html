@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layouts/master-layout}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <title>eFlight Scheduling - Runways</title>
 </head>
 <body>
+     <div layout:fragment="content" style="padding-top:1em;" class="container">
+        <div>
+            <span style="font-size: 2em; color: #32a5e7;">List of All Runways</span>
+            <span style="float:right;">
+                <a class="btn btn-outline-success btn-lg" href="/eflight/runways/new">Add a New Runways</a>
+            </span>
+        </div>
+
+        <p>&nbsp;</p>
+        <div style="font-size: 1em">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Runway Code</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="runway,iterStat : ${runways}">
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <td th:text="${runway.code}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+    <th:block layout:fragment="footer"></th:block>
 
 </body>
 </html>

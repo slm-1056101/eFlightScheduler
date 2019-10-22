@@ -1,5 +1,7 @@
 package edu.mum.cs.cs425.eFlightScheduler.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -17,12 +19,10 @@ public class Schedule {
 
     @NotNull
     @OneToOne(optional = false)
-    @PrimaryKeyJoinColumn
     private Flight flight;
 
     @NotNull
     @OneToOne(optional = false)
-    @PrimaryKeyJoinColumn
     private Runway runway;
 
     @NotNull
@@ -34,9 +34,22 @@ public class Schedule {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    public Schedule(@NotNull Flight flight, @NotNull Status status, @NotNull LocalDateTime time) {
+    @Transient
+    @JsonIgnore
+    public Schedule after;
+
+    @Transient
+    @JsonIgnore
+    public Schedule before;
+
+    public Schedule(@NotNull Flight flight, @NotNull Runway runway, @NotNull Status status, @NotNull LocalDateTime time) {
         this.flight = flight;
+        this.runway = runway;
         this.status = status;
+        this.time = time;
+    }
+
+    public Schedule(@NotNull LocalDateTime time) {
         this.time = time;
     }
 
@@ -86,4 +99,6 @@ public class Schedule {
                 ", time=" + time +
                 '}';
     }
+
+//    public static Schedule from()
 }
