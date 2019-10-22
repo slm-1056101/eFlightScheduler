@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    List<Schedule> findAllByFlightAfter(Long cursor);
+    List<Schedule> findAllByIdAfter(Long cursor);
 
-    List<Schedule> findFirst3ByRunwayOrderByTimeDesc(Runway runway);
+    List<Schedule> findAllByRunwayOrderByTimeDesc(Runway runway);
 
 }

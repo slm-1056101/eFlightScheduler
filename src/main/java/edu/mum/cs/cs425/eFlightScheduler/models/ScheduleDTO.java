@@ -7,8 +7,6 @@ public class ScheduleDTO {
 
     private Long flightId;
 
-    private Long runwayId;
-
     private String status;
 
     private String time;
@@ -19,14 +17,6 @@ public class ScheduleDTO {
 
     public void setFlightId(Long flightId) {
         this.flightId = flightId;
-    }
-
-    public Long getRunwayId() {
-        return runwayId;
-    }
-
-    public void setRunwayId(Long runwayId) {
-        this.runwayId = runwayId;
     }
 
     public String getStatus() {
@@ -49,7 +39,6 @@ public class ScheduleDTO {
     public String toString() {
         return "ScheduleDTO{" +
                 "flightId=" + flightId +
-                ", runwayId=" + runwayId +
                 ", status='" + status + '\'' +
                 ", time='" + time + '\'' +
                 '}';
