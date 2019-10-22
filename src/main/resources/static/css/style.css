@@ -90,6 +90,20 @@ banner
     background-color:#0cb8b6;
     color: whitesmoke;
 }
+
+.btn-light{
+	border: 1px solid whitesmoke;
+	background-color: transparent !important;
+	color: whitesmoke;
+
+}
+
+.btn-light:hover{
+    border: none;
+    background-color:#0cb8b6 !important;
+    color: whitesmoke;
+}
+
 .overlay-detail a i {
     text-align: center;
     position: absolute;
