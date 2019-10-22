@@ -46,13 +46,14 @@ public class ScheduleService implements IScheduleService {
         Optional<Status> status = getStatus(scheduleDTO.getStatus().toLowerCase());
         Optional<LocalDateTime> time = getTime(scheduleDTO.getTime());
         Optional<Flight> flight = flightService.findById(scheduleDTO.getFlightId());
+        List<Runway> runways = runwayService.getAllRunways();
 
-        if (!status.isPresent() || !time.isPresent() || !flight.isPresent())
+        if (!status.isPresent() || !time.isPresent() || !flight.isPresent() || runways.isEmpty())
             return Optional.empty();
 
 
-        Schedule schedule = schedule(flight.get(), status.get(), time.get());
-
+        Schedule schedule = schedule(flight.get(), status.get(), time.get(), runways);
+        System.out.println(schedule);
         // TODO Persist Schedule
         // repository.save(schedule);
 
@@ -89,20 +90,18 @@ public class ScheduleService implements IScheduleService {
 
     /**
      * Schedule flight
-     * @param flight {@link Flight} to schedule
-     * @param status {@link Status} flight status
-     * @param time   {@link LocalDateTime} flight time
+     * @param flight  {@link Flight} to schedule
+     * @param status  {@link Status} flight status
+     * @param time    {@link LocalDateTime} flight time
+     * @param runways {@link Iterable} of {@link Runway}s
      * @return {@link Schedule} a flight schedule
      */
-    public Schedule schedule(Flight flight, Status status, LocalDateTime time) {
+    public Schedule schedule(Flight flight, Status status, LocalDateTime time, Iterable<Runway> runways) {
         PriorityQueue<RunwayTimePair> queue = new PriorityQueue<>();
-        List<Runway> runways = runwayService.getAllRunways();
         for (Runway runway : runways) {
             List<Schedule> schedules = repository.findFirst3ByRunwayOrderByTimeDesc(runway);
-            Scheduler scheduler = Scheduler.getTypicalScheduler();
-            scheduler.addAll(schedules);
-            Schedule schedule = new Schedule(time);
-            boolean isReservable = scheduler.isReservable(schedule);
+            Scheduler scheduler = Scheduler.fromSchedules(schedules);
+            boolean isReservable = scheduler.isReservable(new Schedule(time));
             queue.offer(new RunwayTimePair(runway, isReservable ? time : scheduler.getSoonestTime()));
         }
 

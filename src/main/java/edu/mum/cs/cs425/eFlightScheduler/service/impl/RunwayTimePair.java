@@ -29,4 +29,12 @@ public class RunwayTimePair implements Comparable<RunwayTimePair> {
     public LocalDateTime getTime() {
         return time;
     }
+
+    @Override
+    public String toString() {
+        return "RunwayTimePair{" +
+                "runway=" + runway +
+                ", time=" + time +
+                '}';
+    }
 }

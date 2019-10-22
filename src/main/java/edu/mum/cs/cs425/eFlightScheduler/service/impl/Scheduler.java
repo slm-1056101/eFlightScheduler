@@ -23,11 +23,11 @@ public class Scheduler {
      * Assumes all schedules are valid
      * @param collection {@link Collection} of {@link Schedule}s
      */
-    public void addAll(Collection<Schedule> collection) {
+    public void addAll(Collection<? extends Schedule> collection) {
         collection.forEach(this::add);
     }
 
-    private void add(Schedule schedule) {
+    public void add(Schedule schedule) {
         if (rootSchedule == null) {
             rootSchedule = schedule;
             return;
@@ -109,7 +109,9 @@ public class Scheduler {
         return getLastSchedule(schedule.after);
     }
 
-    public static Scheduler getTypicalScheduler() {
-        return new Scheduler(Duration.of(3, ChronoUnit.SECONDS));
+    public static Scheduler fromSchedules(Collection<? extends Schedule> collection) {
+        Scheduler scheduler = new Scheduler(Duration.of(3, ChronoUnit.SECONDS));
+        scheduler.addAll(collection);
+        return scheduler;
     }
 }
