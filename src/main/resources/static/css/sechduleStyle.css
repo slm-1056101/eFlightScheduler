@@ -14,7 +14,7 @@ body {
 
 .card {
   display: flex;
-  height: 280px;
+  height: 310px;
   width: 200px;
   background-color: #17141d;
   border-radius: 10px;
