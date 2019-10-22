@@ -34,6 +34,10 @@ public class Runway {
         this.code = code;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Runway{" +
