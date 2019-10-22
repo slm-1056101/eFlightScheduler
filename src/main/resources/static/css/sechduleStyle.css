@@ -6,7 +6,7 @@ body {
 .container {
   position: absolute;
   height: 320px;
-  width: 100%;
+  width: 90%;
   top: 25%;
   left: 16%;
   display: flex;
@@ -43,9 +43,10 @@ body {
   color: white;
   font-weight: 300;
   position: absolute;
-  left: 46px;
+  left: 40px;
   top: 25px;
   font-family: cursive;
+  font-size: 1.5rem !important;
 }
 
 .bar {
