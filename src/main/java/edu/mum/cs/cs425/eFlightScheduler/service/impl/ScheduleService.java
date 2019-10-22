@@ -1,9 +1,6 @@
 package edu.mum.cs.cs425.eFlightScheduler.service.impl;
 
-import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
-import edu.mum.cs.cs425.eFlightScheduler.models.Schedule;
-import edu.mum.cs.cs425.eFlightScheduler.models.ScheduleDTO;
-import edu.mum.cs.cs425.eFlightScheduler.models.Status;
+import edu.mum.cs.cs425.eFlightScheduler.models.*;
 import edu.mum.cs.cs425.eFlightScheduler.repository.ScheduleRepository;
 import edu.mum.cs.cs425.eFlightScheduler.service.IFlightService;
 import edu.mum.cs.cs425.eFlightScheduler.service.IScheduleService;
@@ -42,25 +39,48 @@ public class ScheduleService implements IScheduleService {
 
     @Override
     public Optional<Schedule> save(ScheduleDTO scheduleDTO) {
+        Optional<Status> status = getStatus(scheduleDTO.getStatus().toLowerCase());
+        Optional<LocalDateTime> time = getTime(scheduleDTO.getTime());
         Optional<Flight> flight = flightService.findById(scheduleDTO.getFlightId());
-        if (!flight.isPresent()) return Optional.empty();
 
-        Status status;
-        LocalDateTime time;
-        try {
-            status = Status.valueOf(scheduleDTO.getStatus().toLowerCase());
-            time = LocalDateTime.parse(scheduleDTO.getTime());
-        } catch (IllegalArgumentException | DateTimeParseException e) {
-            e.printStackTrace();
+        if (!status.isPresent() || !time.isPresent() || !flight.isPresent())
             return Optional.empty();
-        }
 
-        Schedule schedule = schedule(flight.get(), status, time);
+
+        Schedule schedule = schedule(flight.get(), status.get(), time.get());
 
         // TODO Persist Schedule
         // repository.save(schedule);
 
         return Optional.of(schedule);
+    }
+
+    /**
+     * Get status
+     * @param status Status string
+     * @return {@link Optional}
+     */
+    private Optional<Status> getStatus(String status) {
+        try {
+            return Optional.of(Status.valueOf(status));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Get status
+     * @param time Time as a string
+     * @return {@link Optional}
+     */
+    private Optional<LocalDateTime> getTime(String time) {
+        try {
+            return Optional.of(LocalDateTime.parse(time));
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     /**
@@ -71,9 +91,10 @@ public class ScheduleService implements IScheduleService {
      * @return {@link Schedule} a flight schedule
      */
     public Schedule schedule(Flight flight, Status status, LocalDateTime time) {
-        Schedule schedule = new Schedule(flight, status, time);
-
+        Runway runway = new Runway();
         // TODO Schedule flight on a particular runway
+
+        Schedule schedule = new Schedule(flight, runway, status, time);
 
         return schedule;
     }

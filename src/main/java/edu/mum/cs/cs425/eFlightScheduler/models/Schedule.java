@@ -34,8 +34,9 @@ public class Schedule {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    public Schedule(@NotNull Flight flight, @NotNull Status status, @NotNull LocalDateTime time) {
+    public Schedule(@NotNull Flight flight, @NotNull Runway runway, @NotNull Status status, @NotNull LocalDateTime time) {
         this.flight = flight;
+        this.runway = runway;
         this.status = status;
         this.time = time;
     }
