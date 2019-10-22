@@ -3,6 +3,7 @@ package edu.mum.cs.cs425.eFlightScheduler.service.impl;
 import edu.mum.cs.cs425.eFlightScheduler.models.*;
 import edu.mum.cs.cs425.eFlightScheduler.repository.ScheduleRepository;
 import edu.mum.cs.cs425.eFlightScheduler.service.IFlightService;
+import edu.mum.cs.cs425.eFlightScheduler.service.IRunwayService;
 import edu.mum.cs.cs425.eFlightScheduler.service.IScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Optional;
+import java.util.PriorityQueue;
 
 /**
  * Schedule service
@@ -20,11 +22,13 @@ public class ScheduleService implements IScheduleService {
 
     private ScheduleRepository repository;
     private IFlightService flightService;
+    private IRunwayService runwayService;
 
     @Autowired
-    public ScheduleService(ScheduleRepository repository, IFlightService flightService) {
+    public ScheduleService(ScheduleRepository repository, IFlightService flightService, IRunwayService runwayService) {
         this.repository = repository;
         this.flightService = flightService;
+        this.runwayService = runwayService;
     }
 
     @Override
@@ -91,11 +95,20 @@ public class ScheduleService implements IScheduleService {
      * @return {@link Schedule} a flight schedule
      */
     public Schedule schedule(Flight flight, Status status, LocalDateTime time) {
-        Runway runway = new Runway();
-        // TODO Schedule flight on a particular runway
+        PriorityQueue<RunwayTimePair> queue = new PriorityQueue<>();
+        List<Runway> runways = runwayService.getAllRunways();
+        for (Runway runway : runways) {
+            List<Schedule> schedules = repository.findFirst3ByRunwayOrderByTimeDesc(runway);
+            Scheduler scheduler = Scheduler.getTypicalScheduler();
+            scheduler.addAll(schedules);
+            Schedule schedule = new Schedule(time);
+            boolean isReservable = scheduler.isReservable(schedule);
+            queue.offer(new RunwayTimePair(runway, isReservable ? time : scheduler.getSoonestTime()));
+        }
 
-        Schedule schedule = new Schedule(flight, runway, status, time);
-
-        return schedule;
+        RunwayTimePair pair = queue.peek();
+        assert pair != null;
+        return new Schedule(flight, pair.getRunway(), status, pair.getTime());
     }
+
 }

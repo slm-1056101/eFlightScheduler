@@ -5,8 +5,6 @@ import javax.validation.constraints.NotBlank;
 
 /**
  * Flight class
- *
- * TODO Do we need a flight number
  */
 @Entity
 @Table(name = "flights")
