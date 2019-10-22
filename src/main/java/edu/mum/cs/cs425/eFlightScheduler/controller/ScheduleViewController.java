@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/eflight/schedule")
 public class ScheduleViewController {
 
-    @GetMapping("/")
+    @GetMapping("/list")
     public String home() {
         return "public/schedule/index";
     }

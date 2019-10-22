@@ -38,7 +38,7 @@ public class ScheduleServiceTest {
         LocalDateTime next = now.plus(5, ChronoUnit.SECONDS);
         Schedule schedule1 = new Schedule(now);
         Schedule schedule2 = new Schedule(next);
-        when(repository.findFirst3ByRunwayOrderByTimeDesc(any()))
+        when(repository.findAllByRunwayOrderByTimeDesc(any()))
                 .thenReturn(Arrays.asList(schedule1, schedule2));
 
         Schedule schedule = service.schedule(flight, Status.landing, LocalDateTime.now(), runways);
