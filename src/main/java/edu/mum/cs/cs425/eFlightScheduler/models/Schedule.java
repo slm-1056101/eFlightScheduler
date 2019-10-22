@@ -34,9 +34,20 @@ public class Schedule {
     @Column(nullable = false)
     private LocalDateTime time;
 
-    public Schedule(@NotNull Flight flight, @NotNull Status status, @NotNull LocalDateTime time) {
+    @Transient
+    public Schedule after;
+
+    @Transient
+    public Schedule before;
+
+    public Schedule(@NotNull Flight flight, @NotNull Runway runway, @NotNull Status status, @NotNull LocalDateTime time) {
         this.flight = flight;
+        this.runway = runway;
         this.status = status;
+        this.time = time;
+    }
+
+    public Schedule(@NotNull LocalDateTime time) {
         this.time = time;
     }
 
@@ -86,4 +97,6 @@ public class Schedule {
                 ", time=" + time +
                 '}';
     }
+
+//    public static Schedule from()
 }
