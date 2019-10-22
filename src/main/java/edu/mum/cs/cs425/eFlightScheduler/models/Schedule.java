@@ -18,11 +18,11 @@ public class Schedule {
     private Long id;
 
     @NotNull
-    @OneToOne(optional = false)
+    @OneToOne
     private Flight flight;
 
     @NotNull
-    @OneToOne(optional = false)
+    @OneToOne
     private Runway runway;
 
     @NotNull
@@ -89,6 +89,10 @@ public class Schedule {
         this.time = time;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Schedule{" +
@@ -99,6 +103,4 @@ public class Schedule {
                 ", time=" + time +
                 '}';
     }
-
-//    public static Schedule from()
 }

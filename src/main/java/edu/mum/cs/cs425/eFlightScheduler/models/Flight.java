@@ -44,6 +44,10 @@ public class Flight {
         this.description = description;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
