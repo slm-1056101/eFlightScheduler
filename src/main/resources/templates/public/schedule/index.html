@@ -17,8 +17,9 @@
             </div>
 
             <div class="container">
+
                 <div class="card" th:each="sechdule,iterStat : ${sechduled}" th:if="${iterStat.index}<5">
-                        <h3 class="title" th:text="${sechdule.flight.id}">Flight 1</h3>
+                        <h3 class="title" th:text="'Flight NO' + ${sechdule.flight.id}"></h3>
                         <div class="bar">
                             <div class="emptybar"></div>
                             <div class="filledbar"></div>
@@ -30,7 +31,7 @@
                                     <span><i class="fa fa-plane"></i></span>
                                 </div>
                                 <div class="text_div">
-                                    <span th:text="${sechdule.flight.airline}">Ethiopian Airline, ET</span><br>
+                                    <span th:text="${sechdule.flight.airline}"></span><br>
                                 </div>
                             </div>
 
@@ -39,7 +40,7 @@
                                     <span><i class="fa fa-building"></i></span>
                                 </div>
                                 <div class="text_div">
-                                    <span th:text="${sechdule.flight.airline}"> Chicago Int., USA </span><br>
+                                    <span th:text="${sechdule.flight.airline}"></span><br>
                                 </div>
                             </div>
 
@@ -48,7 +49,7 @@
                                     <span><i class="fa fa-road"></i></span>
                                 </div>
                                 <div class="text_div">
-                                    <span th:text="${sechdule.runway.code}">runway no 3</span><br>
+                                    <span th:text="${sechdule.runway.code}"></span><br>
                                 </div>
                             </div>
 
@@ -57,7 +58,7 @@
                                     <span><i class="fa fa-clock-o"></i></span>
                                 </div>
                                 <div class="text_div">
-                                    <span th:text="${sechdule.time}">In 5 minutes</span><br>
+                                    <span th:text="${#temporals.format(sechdule.time, 'dd/MMM/yyyy HH:mm')}"></span><br>
                                 </div>
                             </div>
 
@@ -66,36 +67,11 @@
                                     <span><i class="fa fa-flag"></i></span>
                                 </div>
                                 <div class="text_div">
-                                    <span th:text="${sechdule.status}">Landing</span><br>
+                                    <span th:text="${sechdule.status}"></span><br>
                                 </div>
                             </div>
                         </div>
                 </div>
-
-                 <div class="card">
-                        <h3 class="title">Flight 2</h3>
-                        <div class="bar">
-                        <div class="emptybar"></div>
-                        <div class="filledbar"></div>
-                        </div>
-                </div>
-                <div class="card">
-                        <h3 class="title">Flight 3</h3>
-                        <div class="bar">
-                        <div class="emptybar"></div>
-                        <div class="filledbar"></div>
-                        </div>
-                </div>
-                <div class="card">
-                        <h3 class="title">Flight 4</h3>
-                        <div class="bar">
-                        <div class="emptybar"></div>
-                        <div class="filledbar"></div>
-                        </div>
-                        
-                </div>
-
-
                 <div id="getResultDiv" style="padding:20px 10px 20px 50px; display:none">
                     <ul class="list-group">
                     </ul>
