@@ -8,19 +8,23 @@ function test() {
 
     $.ajax({
                         type: "GET",
-                        url: 'http://localhost:8080/eflight/api/schedule/' + globe_index,
+                        url: 'http://localhost:8080/eflight/api/schedule/' +globe_index,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
-                            console.log("success", data);
-                             $('#sechdules').remove();
-                            var col_max_value = 1;
                             
+                            if (data.length > 0)  {
+                                globe_index = data[data.length - 1].id;
+                                $sechdule.empty();
+                            }       
+                            console.log("success", globe_index);
+                            var col_max_value = 4;
+
                             for(i = 0 ; i < data.length ; i++){
 
-                                if(i >= col_max_value){
-                                    globe_index = i;
-                                    return i < col_max_value;
+                                if(i > col_max_value){
+                        
+                                    break;
                                 }
 
                                 $sechdule.append('<div class="card">'
@@ -78,7 +82,9 @@ function test() {
                         '</div>'+
                 '</div>'      
                                );
-                            }                      
+                               
+                            }
+                                     
                         }
                     }); 
   
