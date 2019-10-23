@@ -1,8 +1,5 @@
 package edu.mum.cs.cs425.eFlightScheduler.kafka.producer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -14,11 +11,14 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Configuration
 public class SenderConfig {
 
-  @Value("${kafka.bootstrap-servers}")
+  @Value("${kafka.boot.server}")
   private String bootstrapServers;
 
   @Bean

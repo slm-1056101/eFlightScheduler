@@ -2,7 +2,6 @@ package edu.mum.cs.cs425.eFlightScheduler;
 
 import edu.mum.cs.cs425.eFlightScheduler.kafka.consumer.Receiver;
 import edu.mum.cs.cs425.eFlightScheduler.kafka.producer.Sender;
-import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -47,8 +46,7 @@ public class SpringKafkaApplicationTest {
 
     @Test
     public void testReceive() throws Exception {
-        Flight flight = new Flight("American Airline", "Passenger Airline");
-        sender.send(flight);
+        sender.send();
 
         receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
         assertThat(receiver.getLatch().getCount()).isEqualTo(0);

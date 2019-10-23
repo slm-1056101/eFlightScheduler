@@ -20,35 +20,35 @@ import edu.mum.cs.cs425.eFlightScheduler.service.impl.RunwayService;
 @Controller
 @RequestMapping(value = "/eflight/runways")
 public class RunwayController {
-	
-	@Autowired
-	private RunwayService runwayService;
-	
-	@Autowired
-	private RunwayController(RunwayService runwayService) {
-		this.runwayService = runwayService;
-	}
-	
-	@GetMapping(value = {"/list"})
+
+    @Autowired
+    private RunwayService runwayService;
+
+    @Autowired
+    private RunwayController(RunwayService runwayService) {
+        this.runwayService = runwayService;
+    }
+
+    @GetMapping(value = {"/list"})
     public ModelAndView listRunways() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("runways", runwayService.getAllRunways());
-        modelAndView.setViewName("public/runways/list");
+        modelAndView.setViewName("secured/runways/list");
         return modelAndView;
     }
-	
-	@GetMapping(value = {"/new"})
+
+    @GetMapping(value = {"/new"})
     public String displayNewRunwayForm(Model model) {
         model.addAttribute("runway", new Runway());
-        return "public/runways/new";
+        return "secured/runways/new";
     }
-	
+
     @PostMapping(value = {"/new"})
     public String addNewRunway(@Valid @ModelAttribute("runway") Runway runway,
-                                     BindingResult bindingResult, Model model) {
+                               BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
-            return "publilc/runways/new";
+            return "secured/runways/new";
         }
         runway = runwayService.addNewRunway(runway);
         return "redirect:/eflight/runways/list";
