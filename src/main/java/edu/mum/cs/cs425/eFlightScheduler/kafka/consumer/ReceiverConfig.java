@@ -1,8 +1,5 @@
 package edu.mum.cs.cs425.eFlightScheduler.kafka.consumer;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import edu.mum.cs.cs425.eFlightScheduler.models.Flight;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -15,12 +12,15 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Configuration
 @EnableKafka
 public class ReceiverConfig {
 
-  @Value("${kafka.bootstrap-servers}")
+  @Value("${kafka.boot.server}")
   private String bootstrapServers;
 
   @Bean
