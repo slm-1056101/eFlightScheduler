@@ -10,21 +10,21 @@
     <meta name="author" content="Group 3">
     <link rel="icon" href="favicon.ico">
     <!-- Font Awesome -->
-  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  	<!-- Bootstrap core CSS -->
-  	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-  	<!-- Material Design Bootstrap -->
-  	<link th:href="@{/css/mdb.min.css}" rel="stylesheet">
-  	<!-- Custom styling -->
-  	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" type="text/css">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <!-- Material Design Bootstrap -->
+    <link th:href="@{/css/mdb.min.css}" rel="stylesheet" type="text/css">
+    <!-- Custom styling -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <title>eFlight Scheduling System</title>
 </head>
 <body>
-    <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
-    <div layout:fragment="content"></div>
+<div layout:fragment="content"></div>
 
-    <div th:replace="fragments/footer :: footer"></div>
+<div th:replace="fragments/footer :: footer"></div>
 
     <!-- ================================================== -->
     <!-- Bootstrap core JavaScript source files -->
@@ -41,6 +41,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script rel="javascript" type="text/javascript" th:src="@{/js/sechduler.js}"></script>
 
-   
 </body>
 </html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layouts/master-layout}">
+<head>
+    <title>eFlight Scheduling - Home</title>
+</head>
+<body >
+    <div layout:fragment="content" style="padding-top:0px; padding-left:0px; padding-right:0px" class="container-fluid">
+						<section id="banner" class="banner">
+					<div class="bg-color">
+
+					<div class="container">
+						<div class="row">
+						<div class="banner-info">
+							<div class="banner-logo text-center">
+							<img th:src="@{/img/airplane.png}" class="img-responsive">
+							</div>
+							<div class="banner-text text-center">
+							<h1 >Sechduler at your desk</h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br>tempor incididunt ut labore et dolore magna aliqua.</p>
+							<a href="/eflight/schedule/list" class="btn btn-appoint">see Sechdule </a>
+							</div>
+						</div>
+						</div>
+					</div>
+					</div>
+				</section>
+				<!--/ banner-->
+				<!--service-->
+				<section id="service" class="section-padding">
+					<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+						<h2 class="ser-title">Our Service</h2>
+						<hr class="botm-line">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris cillum.</p>
+						</div>
+						<div class="col-md-4 col-sm-4">
+						<div class="service-info">
+							<div class="icon">
+							<i class="fa fa-road"></i>
+							</div>
+							<div class="icon-info">
+							<h4>Runway Managment</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							</div>
+						</div>
+						</div>
+						<div class="col-md-4 col-sm-4">
+						<div class="service-info">
+							<div class="icon">
+							<i class="fa fa-plane"></i>
+							</div>
+							<div class="icon-info">
+							<h4>Flight Sechduling</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							</div>
+						</div>
+						</div>
+					</div>
+					</div>
+				</section>
+				<!--/ service-->
+    </div>
+
+    <th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

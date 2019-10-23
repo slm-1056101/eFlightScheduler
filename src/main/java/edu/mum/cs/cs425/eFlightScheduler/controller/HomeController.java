@@ -11,4 +11,9 @@ public class HomeController {
         return "public/index";
     }
 
+    @GetMapping("/eflight/secured/home")
+    public String securedHome() {
+        return "secured/index";
+    }
+
 }

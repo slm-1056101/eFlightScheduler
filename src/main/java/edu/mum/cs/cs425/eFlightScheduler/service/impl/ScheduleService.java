@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Optional;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Schedule service
@@ -53,9 +51,7 @@ public class ScheduleService implements IScheduleService {
             return Optional.empty();
 
         Schedule schedule = schedule(flight.get(), status.get(), time.get(), runways);
-        System.out.println(schedule);
         schedule = repository.save(schedule);
-
         return Optional.of(schedule);
     }
 
@@ -96,16 +92,16 @@ public class ScheduleService implements IScheduleService {
      * @return {@link Schedule} a flight schedule
      */
     public Schedule schedule(Flight flight, Status status, LocalDateTime time, Iterable<Runway> runways) {
-        PriorityQueue<RunwayTimePair> queue = new PriorityQueue<>();
+        List<RunwayTimePair> list = new ArrayList<>();
         for (Runway runway : runways) {
             List<Schedule> schedules = repository.findAllByRunwayOrderByTimeDesc(runway);
             Scheduler scheduler = Scheduler.fromSchedules(schedules);
             boolean isReservable = scheduler.isReservable(new Schedule(time));
-            queue.offer(new RunwayTimePair(runway, isReservable ? time : scheduler.getSoonestTime()));
+            list.add(new RunwayTimePair(runway, isReservable ? time : scheduler.getSoonestTime()));
         }
 
-        RunwayTimePair pair = queue.peek();
-        assert pair != null;
+        int randomIndex = new Random(System.currentTimeMillis()).nextInt(list.size());
+        RunwayTimePair pair = list.get(randomIndex);
         return new Schedule(flight, pair.getRunway(), status, pair.getTime());
     }
 
