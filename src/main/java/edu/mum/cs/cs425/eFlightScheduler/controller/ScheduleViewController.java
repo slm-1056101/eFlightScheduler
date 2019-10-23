@@ -25,7 +25,7 @@ public class ScheduleViewController {
     public ModelAndView showSechduled() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("sechduled", service.getAll());
-        mv.setViewName("public/schedule/index");
+        mv.setViewName("secured/schedule/index");
         List<Schedule> test = service.getAll();
         System.out.println(" the list is not empty"  +  test.size()); 
         return mv;
