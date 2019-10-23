@@ -25,7 +25,7 @@ public class Sender {
 
   public void send() {
     Random ran=new Random();
-    int id=ran.nextInt(5);
+    int id=ran.nextInt(8);
     if(id==0) id+=1;
     Optional<Flight> flight=flightService.findById((long)id);
     Flight flight1=null;

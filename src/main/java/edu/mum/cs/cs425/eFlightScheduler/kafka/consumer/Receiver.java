@@ -32,7 +32,7 @@ public class Receiver {
     JSONObject obj = new JSONObject();
     Random ran=new Random();
     String status="";
-    int threshold=ran.nextInt(5);
+    int threshold=ran.nextInt(4);
     if (flight.getId()>threshold){
       status+="takeoff";
     }else{
