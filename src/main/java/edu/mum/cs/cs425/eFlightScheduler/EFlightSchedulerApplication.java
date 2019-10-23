@@ -30,7 +30,7 @@ public class EFlightSchedulerApplication implements CommandLineRunner {
                 System.out.println("Sending To Kafka broker");
                 sender.send();
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(60000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
