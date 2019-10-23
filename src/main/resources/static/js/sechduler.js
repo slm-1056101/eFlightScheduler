@@ -1,7 +1,10 @@
 var globe_index = 0;
-$(function test() {
+var myVar;
+
+function test() {
     
     var $sechdule = $('#sechdules');
+    var $card = $('.card');
 
     $.ajax({
                         type: "GET",
@@ -10,10 +13,18 @@ $(function test() {
                         dataType: "json",
                         success: function (data) {
                             console.log("success", data);
-                           $.each(data, function (i, sched) {
+                             $('#sechdules').remove();
+                            var col_max_value = 1;
+                            
+                            for(i = 0 ; i < data.length ; i++){
 
-                               $sechdule.append('<div class="card">'
-                        +'<h3 class="title">' + "Flight No"+ sched.flight.id + '</h3>'+
+                                if(i >= col_max_value){
+                                    globe_index = i;
+                                    return i < col_max_value;
+                                }
+
+                                $sechdule.append('<div class="card">'
+                        +'<h3 class="title">' + "Flight No"+ data[i].flight.id + '</h3>'+
                         '<div class="bar">' +
                             '<div class="emptybar"></div>'+
                            '<div class="filledbar"></div>' +
@@ -25,7 +36,7 @@ $(function test() {
                                     '<span><i class="fa fa-plane"></i></span>'+
                                 '</div>'+
                                 '<div class="text_div">'+
-                                    '<span>'+ sched.flight.airline +'</span><br>'+
+                                    '<span>'+ data[i].flight.airline +'</span><br>'+
                                 '</div>'+
                             '</div>'+
 
@@ -43,7 +54,7 @@ $(function test() {
                                     '<span><i class="fa fa-road"></i></span>' +
                                 '</div>' +
                                 '<div class="text_div">'+
-                                    '<span>'+ sched.runway.code +'</span><br>'+
+                                    '<span>'+ data[i].runway.code +'</span><br>'+
                                 '</div>'+
                            '</div>'+
 
@@ -52,7 +63,7 @@ $(function test() {
                                     '<span><i class="fa fa-clock-o"></i></span>'+
                                 '</div>'+
                                 '<div class="text_div">'+
-                                    '<span>' +  moment(sched.time).endOf('day').fromNow()  + '</span><br>' +
+                                    '<span>' +  moment(data[i].time).endOf('day').fromNow()  + '</span><br>' +
                                 '</div>'+
                             '</div>'+
 
@@ -61,22 +72,21 @@ $(function test() {
                                     '<span><i class="fa fa-flag"></i></span>'+
                                 '</div>'+
                                 '<div class="text_div">'+
-                                    '<span>' + sched.status + '</span><br>'+
+                                    '<span>' + data[i].status + '</span><br>'+
                                 '</div>'+
                             '</div>'+
                         '</div>'+
                 '</div>'      
                                );
-
-                               globe_index = i;
-                            });                            
+                            }                      
                         }
                     }); 
-
-                    setsetTimeout(test(), 1000);
   
-});
+}
 
 
-
+$(document).ready(function(){
+      // test();
+       setInterval("test()", 5000);
+    });
 
