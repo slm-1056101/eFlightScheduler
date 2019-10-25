@@ -1,0 +1,8 @@
+[2019-10-23 21:15:06,503] INFO [GroupCoordinator 0]: Preparing to rebalance group json in state PreparingRebalance with old generation 42 (__consumer_offsets-12) (reason: Adding new member consumer-2-223ba489-e68d-4d44-86c5-53cbb2ac0e51) (kafka.coordinator.group.GroupCoordinator)
+[2019-10-23 21:15:06,506] INFO [GroupCoordinator 0]: Stabilized group json generation 43 (__consumer_offsets-12) (kafka.coordinator.group.GroupCoordinator)
+[2019-10-23 21:15:06,517] INFO [GroupCoordinator 0]: Assignment received from leader for group json for generation 43 (kafka.coordinator.group.GroupCoordinator)
+[2019-10-23 21:15:53,137] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 3 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2019-10-23 21:25:53,134] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2019-10-23 21:35:53,134] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2019-10-23 21:45:53,134] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2019-10-23 21:55:53,134] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)

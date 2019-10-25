@@ -1,0 +1,1 @@
+[2019-10-22 00:13:32,826] INFO Got user-level KeeperException when processing sessionid:0x10003829b9f0000 type:setData cxid:0x113 zxid:0x8d txntype:-1 reqpath:n/a Error Path:/config/topics/users Error:KeeperErrorCode = NoNode for /config/topics/users (org.apache.zookeeper.server.PrepRequestProcessor)
