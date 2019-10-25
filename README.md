@@ -1,3 +1,8 @@
+# how to start kafka and zookeeper servers 
+
+ bin/zookeeper-server-start.sh config/zookeeper.properties
+ bin/kafka-server-start.sh config/server.properties 
+ 
 # eFlightScheduler
 
 CS425 - Software Engineering
