@@ -1,7 +1,7 @@
 # how to start kafka and zookeeper servers 
 
- bin/zookeeper-server-start.sh config/zookeeper.properties
- bin/kafka-server-start.sh config/server.properties 
+ bin/zookeeper-server-start.sh config/zookeeper.properties <br/>
+ bin/kafka-server-start.sh config/server.properties <br/>
  
 # eFlightScheduler
 
